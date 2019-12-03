@@ -3,6 +3,10 @@
 %
 %
 %
+% Note: Make sure in Matlab to run "pyversion <path to python>" (or in 
+%       Matlab2019b "pyenv <path to python>"). 
+%
+%
 % Yoram Zarai, 7/10/19
 
 % ------------------------------------------------------------------------------------
@@ -58,8 +62,9 @@ if(0)
 valsL = ret2{5};
 valsU = ret2{6};
 d = diag(double(ret2{2}));
-fig_fn = './eb_planar.png'
+fig_fn = './eb_planar.png';
 fig_size = [16, 6]; % matplotlib plot figure size
+py.matplotlib.pyplot.switch_backend('Agg');
 fax = py.matplotlib.pyplot.subplots(pyargs('figsize',int8(fig_size)));
 py.TP_TN_OSC_funcs.draw_EB_factorization_ITN( valsL, py.numpy.array(d), valsU, fax{2} ); 
 py.matplotlib.pyplot.savefig(fig_fn)

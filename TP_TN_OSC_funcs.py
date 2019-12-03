@@ -203,7 +203,8 @@ def draw_EB_factorization_ITN( valsL, d, valsU, ax,
     nvU = vU.size
     num_h_nodes = nvL+nvU+2 # total number of horizontal nodes
     
-    G = nx.Graph()     
+    #G = nx.Graph()  # for undirected graph
+    G = nx.DiGraph() # for directed graph
     # all nodes in the graph (total of n rows and num_h_nodes columns)
     for j in range(num_h_nodes):
         for i in range(n):
@@ -235,7 +236,11 @@ def draw_EB_factorization_ITN( valsL, d, valsU, ax,
     pos = nx.get_node_attributes(G,'pos')
     nx.draw(G, pos, ax=ax)
     edge_labels={(u,v,):round(d['weight'],perc_round) for u,v,d in G.edges(data=True)}
+    
+    #nx.draw_networkx_edges(G, pos)  # ADDED
     nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, ax=ax);
+    
+    
     # node labels (names) - we shift the position of the names of the source and sink nodes to the left and
     # right, respectively.
     pos_n = pos.copy()

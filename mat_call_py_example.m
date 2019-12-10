@@ -121,3 +121,33 @@ if( isOSC )
   %fprintf( 1, '(B^2)^(3)=\n');
   %double(BB_mat{1})
 end;
+
+
+% number of sign variations
+% ===========================
+if( 0 )
+len = 100;
+n = 8;
+num_err = 0;
+for cnt = 1 : len
+  v = randn(1,n);
+  v(abs(v)<0.3)=0;
+  % sign vatiation Matlab function
+  [ s_minus, sc_minus, s_plus, sc_plus ] = compute_sign_variation( v );
+
+  % python version
+  ps_minus = double(py.TP_TN_OSC_funcs.s_minus(py.numpy.array(v)));
+  psc_minus = double(py.TP_TN_OSC_funcs.sc_minus(py.numpy.array(v)));
+  ps_plus = double(py.TP_TN_OSC_funcs.s_plus(py.numpy.array(v)));
+  psc_plus = double(py.TP_TN_OSC_funcs.sc_plus(py.numpy.array(v)));
+  fprintf( 1, 'v=[%s], s- = %d,%d, s+ = %d,%d, sc- = %d,%d, sc+ = %d,%d ',...
+           sprintf('%1.2g ', v ),  s_minus, ps_minus, s_plus, ps_plus, sc_minus, psc_minus, sc_plus, psc_plus );
+  if( (s_minus==ps_minus) && (s_plus==ps_plus) && (sc_minus==psc_minus) && (sc_plus==psc_plus) )
+    fprintf( 1, ' - OK.\n' );
+  else
+    fprintf( 1, ' - ERROR !!.\n' );
+    num_err = num_err + 1;
+  end
+end
+fprintf( 1, 'Total of %d errors.\n', num_err );
+end % if(0)

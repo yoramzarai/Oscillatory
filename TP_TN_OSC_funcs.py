@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from scipy.special import comb
 import networkx as nx
 import functools as fnt
-from itertools import combinations
+from itertools import combinations, product
 '''Implementation here of the EB factorization on an invertible TN matrix
     is based on chapter 2 of the book "Totally Nonnegative Matrices", Fallat & Johnson.'''
 
@@ -359,3 +359,34 @@ def osc_exp(A, tol=0):
         if(is_TP(np.linalg.matrix_power(A,r), tol)):
             break
     return r
+
+''' Number of sign variations functions'''
+def s_minus(v):
+    '''This function computes s^{-}(v), where v\in\R^{n} is a numpy array.'''
+    return int(np.sum(np.abs(np.diff(np.sign(v[v!=0]))))/2)
+
+def sc_minus(v):
+    '''This function computes s_c^{-}(v) (cyclic number of sign variations), 
+    where v\in\R^{n} is a numpy array.'''
+    sm = s_minus(v)
+    return sm+np.mod(sm,2)
+    
+def s_plus(v):
+    '''This function computes s^{+}(v), where v\in\R^{n} is a numpy array.'''
+    if np.any(v==0):
+        loc = np.nonzero(v==0)[0]
+        allcomb = product([1,-1], repeat=len(loc))
+        m = []
+        vv = np.copy(v)
+        for i in allcomb:
+            np.put(vv,loc,i)
+            m.append(s_minus(vv))
+        return(max(m))
+    else:
+        return(s_minus(v))
+
+def sc_plus(v):
+    '''This function computes s_c^{+}(v), where v\in\R^{n} is a numpy array.'''
+    sp = s_plus(v)
+    return sp+np.mod(sp,2)
+

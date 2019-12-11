@@ -363,7 +363,7 @@ def osc_exp(A, tol=0):
 ''' Number of sign variations functions'''
 def s_minus(v):
     '''This function computes s^{-}(v), where v\in\R^{n} is a numpy array.'''
-    return int(np.sum(np.abs(np.diff(np.sign(v[v!=0]))))/2)
+    return np.sum(np.abs(np.diff(np.sign(v[v!=0])))/2, dtype=np.int16)
 
 def sc_minus(v):
     '''This function computes s_c^{-}(v) (cyclic number of sign variations), 
@@ -373,15 +373,14 @@ def sc_minus(v):
     
 def s_plus(v):
     '''This function computes s^{+}(v), where v\in\R^{n} is a numpy array.'''
-    if np.any(v==0):
-        loc = np.nonzero(v==0)[0]
+    if (loc := np.nonzero(v==0)[0]).size > 0:
         allcomb = product([1,-1], repeat=len(loc))
-        m = []
+        m = 0
         vv = np.copy(v)
         for i in allcomb:
-            np.put(vv,loc,i)
-            m.append(s_minus(vv))
-        return(max(m))
+            np.put(vv,loc,i)  # same as vv[loc]=i
+            m = max(m, s_minus(vv))
+        return m
     else:
         return(s_minus(v))
 

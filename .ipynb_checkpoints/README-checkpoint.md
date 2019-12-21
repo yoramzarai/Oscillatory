@@ -1,10 +1,22 @@
-# TP/TN/OSC/EB Functions
-This folder contains Python functions and scripts related to TP, TN, and OSC matrices, the EB factorization of I-TN (i.e. invertible-TN) matrices, and the associated planar diagrams. Main functions are stored in TP_TN_OSC_funcs.py. Note that the functions in MC.py are included in TP_TN_OSC_funcs.py.
+# TP, TN and Oscillatory Matrices
+This repository contains Python and Matlab functions and examples related to TP, TN, and oscillatory (OSC) matrices, the EB factorization of I-TN (i.e. invertible-TN) matrices, and the associated planar networks and triangle diagrams.
+
+
+## Functions
+- TP_TN_OSC_funcs.py contains functions related to EB factorization, planar networks and TP/TN/OSC matrices.
 
 ## Notebooks
-- See eb_factorization_example.ipynb for several exmples.
+- eb_factorization_example.ipynb contains several exmples of EB factorization and asscoiated planar networks.
 
-- See mat_call_py_example.m for a Matlab example using these Python functions.
+- SEB_paths.ipynb uses the triangle diagrams (derived from the planar networks of an SEB factorization) to deduce the exponent of an oscillatory matrix $A$, and compute the families of vertex-disjoint paths of each corner minor of $A^r$, where $r$ is the exponent of $A$.
 
-- analyze_osc.ipynb tries to deduce the exponent of an oscillatory matrices.
+- analyze_osc.ipynb analyzes the exponent of an oscillatory matrices.
+
+- MC.ipynb contains functions and example of computing the multiplicative compound of a matrix. Note that there functions there are included in TP_TN_OSC_funcs.py
+
+## Matlab
+
+- mat_call_py_example.m is a Matlab example using the Python functions in the files above.
+
+- compute_sign_variations.m contains Matlab function for computing the number of sign variations in a vector.
 

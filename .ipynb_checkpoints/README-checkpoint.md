@@ -8,7 +8,7 @@ This repository contains Python and Matlab functions and examples related to TP,
 ## Notebooks
 - eb_factorization_example.ipynb contains several exmples of EB factorization and asscoiated planar networks.
 
-- SEB_paths.ipynb uses the triangle diagrams (derived from the planar networks of an SEB factorization) to deduce the exponent of an oscillatory matrix $A$, and compute the families of vertex-disjoint paths of each corner minor of $A^r$, where $r$ is the exponent of $A$.
+- SEB_paths.ipynb uses the triangle graphs (derived from the planar networks of an SEB factorization) to deduce the exponent of an oscillatory matrix $A$, and to compute the families of vertex-disjoint paths of each corner minor of $A^r$, where $r$ is the exponent of $A$.
 
 - analyze_osc.ipynb analyzes the exponent of an oscillatory matrices.
 

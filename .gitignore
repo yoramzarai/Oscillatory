@@ -5,3 +5,4 @@ SEB_paths.html
 SEB_paths.pdf
 venv
 local/
+.DS_Store

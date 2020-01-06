@@ -40,12 +40,24 @@ def U(n, i, a):
     return np.identity(n) + a*E(n, i-1, i)
 
 def compute_L_factorization( A, abs_thres=0 ):
-    '''This function computes the L factorization of a square matrix'''
+    '''This function computes the left-hand side of the SEB factorization
+    of a square matrix.
+    
+    Given a matrix A, the function uses the Neville elimination algorithm
+    to compute L and U, such that A = LU, where L:=[L_n*L_{n-1}*..*L_2]*..*[L_n],
+    and U is an upper-triangular matrix.
+    
+    The outputs are:
+     1. A list of the L_i matrices (in the factorization order)
+     2. The matrix U.
+     3. The parameter values of the L_i matrices.
+    '''
     n = A.shape[0]
     k = comb(n, 2, exact=True)
     Lmat = []
     vals = []
     Um = A
+    # Neville algorithm
     for j in range(n-1):
         for i in range(n-1,j,-1):
             val = Um[i,j] / Um[i-1,j] if Um[i-1,j] != 0 else 0

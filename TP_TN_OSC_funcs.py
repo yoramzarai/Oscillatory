@@ -353,6 +353,14 @@ def is_factorization_TP(lvals, uvals, dvals, lindxs = None):
     results in a TP matrix.'''
     return (dvals>0).all() and (lvals>0).all() and (uvals>0).all()
 
+def is_osc_from_factorization(A: list) -> bool:
+    '''
+    This function checks if the input matrix is oscillatory by examining the 
+    matrix SEB factorization.
+    '''
+    _, Dmat, _, _, lvals, uvals  = EB_factorization_ITN( A )
+    return is_factorization_osc(lvals, uvals, np.diagonal(Dmat))
+
 def show_mat_latex_format(A, fmt='4f'):
     '''This function prints a matrix in a latex format
     to the screen.'''
